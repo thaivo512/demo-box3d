@@ -4,7 +4,7 @@
     background: #fff;
     border-radius: 15px;
     box-shadow: 0px 10px 20px 20px rgba(0, 0, 0, 0.17);
-    padding: 30px;
+    padding: 20px 30px;
     text-align: left;
 }
 
@@ -24,10 +24,7 @@
     margin: 0;
 }
 
-.box3d_cards {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.box3d_cards { 
     perspective: 1800px; 
     transform-style: preserve-3d;
 }
@@ -45,11 +42,16 @@
     transition: transform 200ms ease-out;
     width: 175px;
     text-align: center;
-    margin-left: 30px;
+    margin-left: 20px;
+    margin-bottom: 20px;
 }
 
 .box3d_card:first-child {
     margin-left: 0;
+}
+
+.box3d_cards:not(:last-child) .box3d_card {
+    margin-bottom: 0;
 }
 
 .box3d_card_img {

@@ -51,21 +51,30 @@ const addEffectBox3d = (box3d) => {
 
 const renderBox3d = (box3d) => {
     const box3dData = JSON.parse(box3d.getAttribute("data"));
+    const chunkSize = box3dData.column || box3dData.cards.length;
+    const chunkCards = [...Array(Math.ceil(box3dData.cards.length / chunkSize))].map(_ => box3dData.cards.splice(0, chunkSize));
+
     box3d.innerHTML =
     `
     <h3 class="box3d_description">${box3dData.description}</h3>
     <h1 class="box3d_title">${box3dData.title}</h1>
-    <div class="box3d_cards">${box3dData.cards.map(card =>
-    `
-        <div class="box3d_card">
-            <div class="box3d_card_bg" style="background-image: url('${card.background}')"></div>
-            <img class="box3d_card_img" src="${card.image}" />
-            <div class="box3d_card_text">
-                <p class="box3d_card_title">${card.title}</p>
+    ${
+        chunkCards.map(cards => 
+        `
+        <div class="box3d_cards">${cards.map(card =>
+            `
+            <div class="box3d_card">
+                <div class="box3d_card_bg" style="background-image: url('${card.background}')"></div>
+                <img class="box3d_card_img" src="${card.image}" />
+                <div class="box3d_card_text">
+                    <p class="box3d_card_title">${card.title}</p>
+                </div>
             </div>
-        </div>
-    `
-    ).join('\n')}
+            `
+        ).join('\n')}
+        `    
+        ).join('\n')
+    }
     </div>
     `;
 }
